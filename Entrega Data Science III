@@ -1,0 +1,787 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MartinGalvao/DataScience/blob/main/Entrega%20Data%20Science%20III\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd"
+      ],
+      "metadata": {
+        "id": "oYW-LmWqO5-3"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df = pd.read_csv(\"https://raw.githubusercontent.com/MartinGalvao/DataScience/a7c046c8d1afb03124fc9db185a0cf94bd5cbc4c/Top%201000%20IMDB%20movies%20(1).csv\")"
+      ],
+      "metadata": {
+        "id": "Aq8qXVbMOy3G"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.head().style.set_properties(**{'background-color': '#E9F6E2','color': 'black','border-color': '#8b8c8c'})"
+      ],
+      "metadata": {
+        "id": "kyJLHp3dPJUL",
+        "outputId": "a3a15d14-9e5b-49b2-a9dd-4b0ab04b4d84",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 345
+        }
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<pandas.io.formats.style.Styler at 0x78211680bf50>"
+            ],
+            "text/html": [
+              "<style type=\"text/css\">\n",
+              "#T_52477_row0_col0, #T_52477_row0_col1, #T_52477_row0_col2, #T_52477_row0_col3, #T_52477_row0_col4, #T_52477_row0_col5, #T_52477_row0_col6, #T_52477_row0_col7, #T_52477_row0_col8, #T_52477_row1_col0, #T_52477_row1_col1, #T_52477_row1_col2, #T_52477_row1_col3, #T_52477_row1_col4, #T_52477_row1_col5, #T_52477_row1_col6, #T_52477_row1_col7, #T_52477_row1_col8, #T_52477_row2_col0, #T_52477_row2_col1, #T_52477_row2_col2, #T_52477_row2_col3, #T_52477_row2_col4, #T_52477_row2_col5, #T_52477_row2_col6, #T_52477_row2_col7, #T_52477_row2_col8, #T_52477_row3_col0, #T_52477_row3_col1, #T_52477_row3_col2, #T_52477_row3_col3, #T_52477_row3_col4, #T_52477_row3_col5, #T_52477_row3_col6, #T_52477_row3_col7, #T_52477_row3_col8, #T_52477_row4_col0, #T_52477_row4_col1, #T_52477_row4_col2, #T_52477_row4_col3, #T_52477_row4_col4, #T_52477_row4_col5, #T_52477_row4_col6, #T_52477_row4_col7, #T_52477_row4_col8 {\n",
+              "  background-color: #E9F6E2;\n",
+              "  color: black;\n",
+              "  border-color: #8b8c8c;\n",
+              "}\n",
+              "</style>\n",
+              "<table id=\"T_52477\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr>\n",
+              "      <th class=\"blank level0\" >&nbsp;</th>\n",
+              "      <th id=\"T_52477_level0_col0\" class=\"col_heading level0 col0\" >Unnamed: 0</th>\n",
+              "      <th id=\"T_52477_level0_col1\" class=\"col_heading level0 col1\" >Movie Name</th>\n",
+              "      <th id=\"T_52477_level0_col2\" class=\"col_heading level0 col2\" >Year of Release</th>\n",
+              "      <th id=\"T_52477_level0_col3\" class=\"col_heading level0 col3\" >Watch Time</th>\n",
+              "      <th id=\"T_52477_level0_col4\" class=\"col_heading level0 col4\" >Movie Rating</th>\n",
+              "      <th id=\"T_52477_level0_col5\" class=\"col_heading level0 col5\" >Meatscore of movie</th>\n",
+              "      <th id=\"T_52477_level0_col6\" class=\"col_heading level0 col6\" >Votes</th>\n",
+              "      <th id=\"T_52477_level0_col7\" class=\"col_heading level0 col7\" >Gross</th>\n",
+              "      <th id=\"T_52477_level0_col8\" class=\"col_heading level0 col8\" >Description</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th id=\"T_52477_level0_row0\" class=\"row_heading level0 row0\" >0</th>\n",
+              "      <td id=\"T_52477_row0_col0\" class=\"data row0 col0\" >0</td>\n",
+              "      <td id=\"T_52477_row0_col1\" class=\"data row0 col1\" >The Shawshank Redemption</td>\n",
+              "      <td id=\"T_52477_row0_col2\" class=\"data row0 col2\" >(1994)</td>\n",
+              "      <td id=\"T_52477_row0_col3\" class=\"data row0 col3\" >142 min</td>\n",
+              "      <td id=\"T_52477_row0_col4\" class=\"data row0 col4\" >9.300000</td>\n",
+              "      <td id=\"T_52477_row0_col5\" class=\"data row0 col5\" >81        </td>\n",
+              "      <td id=\"T_52477_row0_col6\" class=\"data row0 col6\" >34,709</td>\n",
+              "      <td id=\"T_52477_row0_col7\" class=\"data row0 col7\" >$28.34M</td>\n",
+              "      <td id=\"T_52477_row0_col8\" class=\"data row0 col8\" >Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th id=\"T_52477_level0_row1\" class=\"row_heading level0 row1\" >1</th>\n",
+              "      <td id=\"T_52477_row1_col0\" class=\"data row1 col0\" >1</td>\n",
+              "      <td id=\"T_52477_row1_col1\" class=\"data row1 col1\" >The Godfather</td>\n",
+              "      <td id=\"T_52477_row1_col2\" class=\"data row1 col2\" >(1972)</td>\n",
+              "      <td id=\"T_52477_row1_col3\" class=\"data row1 col3\" >175 min</td>\n",
+              "      <td id=\"T_52477_row1_col4\" class=\"data row1 col4\" >9.200000</td>\n",
+              "      <td id=\"T_52477_row1_col5\" class=\"data row1 col5\" >100        </td>\n",
+              "      <td id=\"T_52477_row1_col6\" class=\"data row1 col6\" >34,709</td>\n",
+              "      <td id=\"T_52477_row1_col7\" class=\"data row1 col7\" >$134.97M</td>\n",
+              "      <td id=\"T_52477_row1_col8\" class=\"data row1 col8\" >The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th id=\"T_52477_level0_row2\" class=\"row_heading level0 row2\" >2</th>\n",
+              "      <td id=\"T_52477_row2_col0\" class=\"data row2 col0\" >2</td>\n",
+              "      <td id=\"T_52477_row2_col1\" class=\"data row2 col1\" >The Dark Knight</td>\n",
+              "      <td id=\"T_52477_row2_col2\" class=\"data row2 col2\" >(2008)</td>\n",
+              "      <td id=\"T_52477_row2_col3\" class=\"data row2 col3\" >152 min</td>\n",
+              "      <td id=\"T_52477_row2_col4\" class=\"data row2 col4\" >9.000000</td>\n",
+              "      <td id=\"T_52477_row2_col5\" class=\"data row2 col5\" >84        </td>\n",
+              "      <td id=\"T_52477_row2_col6\" class=\"data row2 col6\" >34,709</td>\n",
+              "      <td id=\"T_52477_row2_col7\" class=\"data row2 col7\" >$534.86M</td>\n",
+              "      <td id=\"T_52477_row2_col8\" class=\"data row2 col8\" >When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th id=\"T_52477_level0_row3\" class=\"row_heading level0 row3\" >3</th>\n",
+              "      <td id=\"T_52477_row3_col0\" class=\"data row3 col0\" >3</td>\n",
+              "      <td id=\"T_52477_row3_col1\" class=\"data row3 col1\" >The Lord of the Rings: The Return of the King</td>\n",
+              "      <td id=\"T_52477_row3_col2\" class=\"data row3 col2\" >(2003)</td>\n",
+              "      <td id=\"T_52477_row3_col3\" class=\"data row3 col3\" >201 min</td>\n",
+              "      <td id=\"T_52477_row3_col4\" class=\"data row3 col4\" >9.000000</td>\n",
+              "      <td id=\"T_52477_row3_col5\" class=\"data row3 col5\" >94        </td>\n",
+              "      <td id=\"T_52477_row3_col6\" class=\"data row3 col6\" >34,709</td>\n",
+              "      <td id=\"T_52477_row3_col7\" class=\"data row3 col7\" >$377.85M</td>\n",
+              "      <td id=\"T_52477_row3_col8\" class=\"data row3 col8\" >Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th id=\"T_52477_level0_row4\" class=\"row_heading level0 row4\" >4</th>\n",
+              "      <td id=\"T_52477_row4_col0\" class=\"data row4 col0\" >4</td>\n",
+              "      <td id=\"T_52477_row4_col1\" class=\"data row4 col1\" >Schindler's List</td>\n",
+              "      <td id=\"T_52477_row4_col2\" class=\"data row4 col2\" >(1993)</td>\n",
+              "      <td id=\"T_52477_row4_col3\" class=\"data row4 col3\" >195 min</td>\n",
+              "      <td id=\"T_52477_row4_col4\" class=\"data row4 col4\" >9.000000</td>\n",
+              "      <td id=\"T_52477_row4_col5\" class=\"data row4 col5\" >94        </td>\n",
+              "      <td id=\"T_52477_row4_col6\" class=\"data row4 col6\" >34,709</td>\n",
+              "      <td id=\"T_52477_row4_col7\" class=\"data row4 col7\" >$96.90M</td>\n",
+              "      <td id=\"T_52477_row4_col8\" class=\"data row4 col8\" >In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import nltk\n",
+        "import re\n",
+        "from nltk.corpus import stopwords\n",
+        "from nltk.stem import WordNetLemmatizer\n",
+        "\n",
+        "# Download the necessary NLTK data\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('stopwords')\n",
+        "nltk.download('wordnet')\n",
+        "nltk.download('punkt_tab') # Download the punkt_tab data\n",
+        "\n",
+        "# Define stopwords once outside the function\n",
+        "stop_words = set(stopwords.words('english'))\n",
+        "\n",
+        "# ... (rest of your code remains the same)"
+      ],
+      "metadata": {
+        "id": "u3IFK9B7RK-t"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import nltk\n",
+        "import re\n",
+        "from nltk.corpus import stopwords\n",
+        "from nltk.stem import WordNetLemmatizer\n",
+        "\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('stopwords')\n",
+        "nltk.download('wordnet')\n",
+        "\n",
+        "# Define stopwords once outside the function\n",
+        "stop_words = set(stopwords.words('english'))\n",
+        "\n",
+        "# Assuming your DataFrame is named 'df' and the relevant text column is 'Title'\n",
+        "# Replace 'Title' with the actual column name if different\n",
+        "\n",
+        "def preprocess_text(text):\n",
+        "    if not isinstance(text, str):  # Verifica que el texto no sea NaN u otro tipo\n",
+        "        return \"\"\n",
+        "\n",
+        "    # 1. Lowercasing\n",
+        "    text = text.lower()\n",
+        "\n",
+        "    # 2. Remove punctuation and special characters\n",
+        "    text = re.sub(r'[^\\w\\s]', '', text)\n",
+        "\n",
+        "    # 3. Tokenization\n",
+        "    tokens = nltk.word_tokenize(text)\n",
+        "\n",
+        "    # 4. Remove stop words\n",
+        "    tokens = [token for token in tokens if token not in stop_words]\n",
+        "\n",
+        "    # 5. Lemmatization\n",
+        "    lemmatizer = WordNetLemmatizer()\n",
+        "    tokens = [lemmatizer.lemmatize(token) for token in tokens]\n",
+        "\n",
+        "    # 6. Join tokens back into a string\n",
+        "    processed_text = \" \".join(tokens)\n",
+        "\n",
+        "    return processed_text\n",
+        "\n",
+        "\n",
+        "# Apply the preprocessing function to the 'Title' column\n",
+        "df['Movie Name'] = df['Movie Name'].fillna('')  # Fill NaN values with an empty string\n",
+        "df['processed_Movie Name'] = df['Movie Name'].apply(preprocess_text)\n",
+        "\n",
+        "# Display the first few rows of the preprocessed data\n",
+        "print(df[['Movie Name', 'processed_Movie Name']].head())\n"
+      ],
+      "metadata": {
+        "id": "CKi-5KG5PehC",
+        "outputId": "504ba62c-4f78-4cb6-b370-72300771f185",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                      Movie Name   processed_Movie Name\n",
+            "0                       The Shawshank Redemption   shawshank redemption\n",
+            "1                                  The Godfather              godfather\n",
+            "2                                The Dark Knight            dark knight\n",
+            "3  The Lord of the Rings: The Return of the King  lord ring return king\n",
+            "4                               Schindler's List        schindlers list\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt is already up-to-date!\n",
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Package stopwords is already up-to-date!\n",
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+            "[nltk_data]   Package wordnet is already up-to-date!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: Entrenar una red neuronal en Deep Learning, por ejemplo:\n",
+        "# Para clasificación de texto\n",
+        "# Para generación de texto\n",
+        "# Para análisis de sentimientos\n",
+        "# realiza cualquier de esas 3 con mi dataset\n",
+        "\n",
+        "import pandas as pd\n",
+        "import nltk\n",
+        "import re\n",
+        "from nltk.corpus import stopwords\n",
+        "from nltk.stem import WordNetLemmatizer\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from tensorflow.keras.preprocessing.text import Tokenizer\n",
+        "from tensorflow.keras.preprocessing.sequence import pad_sequences\n",
+        "from tensorflow.keras.models import Sequential\n",
+        "from tensorflow.keras.layers import Embedding, LSTM, Dense\n",
+        "\n",
+        "# ... (your existing code for data loading and preprocessing)\n",
+        "\n",
+        "# Assuming 'processed_Movie Name' contains the preprocessed text data\n",
+        "\n",
+        "# Prepare data for sentiment analysis (example: positive/negative based on rating)\n",
+        "df['sentiment'] = df['Movie Rating'].apply(lambda x: 1 if x >= 7 else 0)  # Positive if rating >= 7, negative otherwise\n",
+        "\n",
+        "# Split data\n",
+        "X_train, X_test, y_train, y_test = train_test_split(\n",
+        "    df['processed_Movie Name'], df['sentiment'], test_size=0.2, random_state=42\n",
+        ")\n",
+        "\n",
+        "# Tokenize text data\n",
+        "tokenizer = Tokenizer(num_words=5000, oov_token='<OOV>')\n",
+        "tokenizer.fit_on_texts(X_train)\n",
+        "sequences_train = tokenizer.texts_to_sequences(X_train)\n",
+        "sequences_test = tokenizer.texts_to_sequences(X_test)\n",
+        "\n",
+        "# Pad sequences\n",
+        "padded_train = pad_sequences(sequences_train, maxlen=100, padding='post', truncating='post')\n",
+        "padded_test = pad_sequences(sequences_test, maxlen=100, padding='post', truncating='post')\n",
+        "\n",
+        "\n",
+        "# Build and train the model\n",
+        "model = Sequential()\n",
+        "model.add(Embedding(5000, 32, input_length=100))\n",
+        "model.add(LSTM(64))\n",
+        "model.add(Dense(1, activation='sigmoid'))\n",
+        "\n",
+        "model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n",
+        "model.fit(padded_train, y_train, epochs=5, validation_data=(padded_test, y_test))\n",
+        "\n",
+        "# Evaluate the model\n",
+        "loss, accuracy = model.evaluate(padded_test, y_test)\n",
+        "print(f\"Test Accuracy: {accuracy}\")\n",
+        "\n",
+        "#Example prediction\n",
+        "new_text = [\"Amazing movie, loved it\"] #Example of a new title\n",
+        "new_sequences = tokenizer.texts_to_sequences(new_text)\n",
+        "new_padded = pad_sequences(new_sequences, maxlen=100, padding='post', truncating='post')\n",
+        "prediction = model.predict(new_padded)\n",
+        "print(f\"Prediction: {prediction}\") #The closer to 1 the better the sentiment\n"
+      ],
+      "metadata": {
+        "id": "MbLB6FbRRcLe",
+        "outputId": "9237572b-2364-4121-c98f-6341cca35331",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Epoch 1/5\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.11/dist-packages/keras/src/layers/core/embedding.py:90: UserWarning: Argument `input_length` is deprecated. Just remove it.\n",
+            "  warnings.warn(\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[1m25/25\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m5s\u001b[0m 64ms/step - accuracy: 0.8517 - loss: 0.4113 - val_accuracy: 1.0000 - val_loss: 9.9425e-04\n",
+            "Epoch 2/5\n",
+            "\u001b[1m25/25\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 50ms/step - accuracy: 1.0000 - loss: 6.6349e-04 - val_accuracy: 1.0000 - val_loss: 2.8412e-04\n",
+            "Epoch 3/5\n",
+            "\u001b[1m25/25\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 48ms/step - accuracy: 1.0000 - loss: 2.5778e-04 - val_accuracy: 1.0000 - val_loss: 2.0489e-04\n",
+            "Epoch 4/5\n",
+            "\u001b[1m25/25\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 48ms/step - accuracy: 1.0000 - loss: 1.9445e-04 - val_accuracy: 1.0000 - val_loss: 1.6747e-04\n",
+            "Epoch 5/5\n",
+            "\u001b[1m25/25\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m2s\u001b[0m 65ms/step - accuracy: 1.0000 - loss: 1.6025e-04 - val_accuracy: 1.0000 - val_loss: 1.4026e-04\n",
+            "\u001b[1m7/7\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 21ms/step - accuracy: 1.0000 - loss: 1.4026e-04\n",
+            "Test Accuracy: 1.0\n",
+            "\u001b[1m1/1\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 214ms/step\n",
+            "Prediction: [[0.99985975]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: Fase 2: Deep Learning (Red Neuronal)\n",
+        "# Convertir las reseñas en vectores (Word Embeddings o Bag of Words).\n",
+        "# Construir una red neuronal sencilla (por ejemplo, una red con capas Dense en Keras).\n",
+        "# Entrenar la red para predecir si una reseña es positiva o negativa.\n",
+        "# Evaluar el modelo y mejorarlo agregando capas o usando embeddings pre-entrenados como Word2Vec o GloVe. realiza esto con mi dataset\n",
+        "\n",
+        "from tensorflow.keras.layers import Dropout\n",
+        "\n",
+        "# ... (your existing code)\n",
+        "\n",
+        "# Build and train the model with improvements\n",
+        "model = Sequential()\n",
+        "model.add(Embedding(5000, 64, input_length=100))  # Increased embedding dimension\n",
+        "model.add(LSTM(128, return_sequences=True)) # Added return_sequences=True\n",
+        "model.add(Dropout(0.2)) # Added dropout for regularization\n",
+        "model.add(LSTM(64)) # Added another LSTM layer\n",
+        "model.add(Dropout(0.2)) # Added another dropout\n",
+        "model.add(Dense(1, activation='sigmoid'))\n",
+        "\n",
+        "model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n",
+        "model.fit(padded_train, y_train, epochs=10, batch_size=64, validation_data=(padded_test, y_test)) # Increased epochs and added batch_size\n",
+        "\n",
+        "# Evaluate the model\n",
+        "loss, accuracy = model.evaluate(padded_test, y_test)\n",
+        "print(f\"Test Accuracy: {accuracy}\")\n",
+        "\n",
+        "#Example prediction\n",
+        "new_text = [\"Amazing movie, loved it\"] #Example of a new title\n",
+        "new_sequences = tokenizer.texts_to_sequences(new_text)\n",
+        "new_padded = pad_sequences(new_sequences, maxlen=100, padding='post', truncating='post')\n",
+        "prediction = model.predict(new_padded)\n",
+        "print(f\"Prediction: {prediction}\") #The closer to 1 the better the sentiment\n"
+      ],
+      "metadata": {
+        "id": "-wPvSG5kR_1R",
+        "outputId": "9ae82d87-0fd2-43ad-adce-2eec581def70",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Epoch 1/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m11s\u001b[0m 488ms/step - accuracy: 0.7669 - loss: 0.4151 - val_accuracy: 1.0000 - val_loss: 0.0023\n",
+            "Epoch 2/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m4s\u001b[0m 329ms/step - accuracy: 1.0000 - loss: 0.0016 - val_accuracy: 1.0000 - val_loss: 3.0225e-04\n",
+            "Epoch 3/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 362ms/step - accuracy: 1.0000 - loss: 3.0212e-04 - val_accuracy: 1.0000 - val_loss: 1.6497e-04\n",
+            "Epoch 4/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 377ms/step - accuracy: 1.0000 - loss: 1.9754e-04 - val_accuracy: 1.0000 - val_loss: 1.3109e-04\n",
+            "Epoch 5/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m11s\u001b[0m 466ms/step - accuracy: 1.0000 - loss: 1.6368e-04 - val_accuracy: 1.0000 - val_loss: 1.1698e-04\n",
+            "Epoch 6/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m10s\u001b[0m 440ms/step - accuracy: 1.0000 - loss: 1.4589e-04 - val_accuracy: 1.0000 - val_loss: 1.0815e-04\n",
+            "Epoch 7/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m9s\u001b[0m 358ms/step - accuracy: 1.0000 - loss: 1.5211e-04 - val_accuracy: 1.0000 - val_loss: 1.0119e-04\n",
+            "Epoch 8/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 468ms/step - accuracy: 1.0000 - loss: 1.3495e-04 - val_accuracy: 1.0000 - val_loss: 9.5372e-05\n",
+            "Epoch 9/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m10s\u001b[0m 436ms/step - accuracy: 1.0000 - loss: 1.1688e-04 - val_accuracy: 1.0000 - val_loss: 9.0376e-05\n",
+            "Epoch 10/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m9s\u001b[0m 354ms/step - accuracy: 1.0000 - loss: 1.2007e-04 - val_accuracy: 1.0000 - val_loss: 8.5765e-05\n",
+            "\u001b[1m7/7\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 61ms/step - accuracy: 1.0000 - loss: 8.5765e-05\n",
+            "Test Accuracy: 1.0\n",
+            "\u001b[1m1/1\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 505ms/step\n",
+            "Prediction: [[0.9999142]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: Convertir las reseñas en vectores (Word Embeddings o Bag of Words). con mi data set\n",
+        "\n",
+        "# ... (your existing code)\n",
+        "\n",
+        "# Assuming 'processed_Movie Name' contains the preprocessed text data\n",
+        "\n",
+        "from sklearn.feature_extraction.text import TfidfVectorizer\n",
+        "\n",
+        "# Create a TF-IDF vectorizer\n",
+        "vectorizer = TfidfVectorizer()\n",
+        "\n",
+        "# Fit and transform the training data\n",
+        "X_train_tfidf = vectorizer.fit_transform(X_train)\n",
+        "\n",
+        "# Transform the test data\n",
+        "X_test_tfidf = vectorizer.transform(X_test)\n",
+        "\n",
+        "# Now you can use X_train_tfidf and X_test_tfidf for your model training\n",
+        "# ... (your model training code using X_train_tfidf and X_test_tfidf)\n"
+      ],
+      "metadata": {
+        "id": "KdMRRi8oSMjE"
+      },
+      "execution_count": 24,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: generame un red neuronal con mi data setr\n",
+        "\n",
+        "# ... (your existing code)\n",
+        "\n",
+        "# Build and train the model with improvements\n",
+        "model = Sequential()\n",
+        "model.add(Embedding(5000, 64, input_length=100))  # Increased embedding dimension\n",
+        "model.add(LSTM(128, return_sequences=True)) # Added return_sequences=True\n",
+        "model.add(Dropout(0.2)) # Added dropout for regularization\n",
+        "model.add(LSTM(64)) # Added another LSTM layer\n",
+        "model.add(Dropout(0.2)) # Added another dropout\n",
+        "model.add(Dense(1, activation='sigmoid'))\n",
+        "\n",
+        "model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n",
+        "model.fit(padded_train, y_train, epochs=10, batch_size=64, validation_data=(padded_test, y_test)) # Increased epochs and added batch_size\n",
+        "\n",
+        "# Evaluate the model\n",
+        "loss, accuracy = model.evaluate(padded_test, y_test)\n",
+        "print(f\"Test Accuracy: {accuracy}\")\n",
+        "\n",
+        "#Example prediction\n",
+        "new_text = [\"Amazing movie, loved it\"] #Example of a new title\n",
+        "new_sequences = tokenizer.texts_to_sequences(new_text)\n",
+        "new_padded = pad_sequences(new_sequences, maxlen=100, padding='post', truncating='post')\n",
+        "prediction = model.predict(new_padded)\n",
+        "print(f\"Prediction: {prediction}\") #The closer to 1 the better the sentiment\n"
+      ],
+      "metadata": {
+        "id": "1TV9RHGhS1E7",
+        "outputId": "1515ea4b-32fb-4d9f-b377-c284811499f5",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Epoch 1/10\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.11/dist-packages/keras/src/layers/core/embedding.py:90: UserWarning: Argument `input_length` is deprecated. Just remove it.\n",
+            "  warnings.warn(\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m11s\u001b[0m 489ms/step - accuracy: 0.7924 - loss: 0.3791 - val_accuracy: 1.0000 - val_loss: 0.0013\n",
+            "Epoch 2/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m4s\u001b[0m 343ms/step - accuracy: 1.0000 - loss: 9.1414e-04 - val_accuracy: 1.0000 - val_loss: 1.8254e-04\n",
+            "Epoch 3/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m5s\u001b[0m 354ms/step - accuracy: 1.0000 - loss: 2.0617e-04 - val_accuracy: 1.0000 - val_loss: 1.0067e-04\n",
+            "Epoch 4/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 428ms/step - accuracy: 1.0000 - loss: 1.2911e-04 - val_accuracy: 1.0000 - val_loss: 8.1040e-05\n",
+            "Epoch 5/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m11s\u001b[0m 476ms/step - accuracy: 1.0000 - loss: 1.0081e-04 - val_accuracy: 1.0000 - val_loss: 7.2986e-05\n",
+            "Epoch 6/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m5s\u001b[0m 365ms/step - accuracy: 1.0000 - loss: 9.5615e-05 - val_accuracy: 1.0000 - val_loss: 6.7995e-05\n",
+            "Epoch 7/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 438ms/step - accuracy: 1.0000 - loss: 8.9030e-05 - val_accuracy: 1.0000 - val_loss: 6.4161e-05\n",
+            "Epoch 8/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m9s\u001b[0m 365ms/step - accuracy: 1.0000 - loss: 8.8503e-05 - val_accuracy: 1.0000 - val_loss: 6.0814e-05\n",
+            "Epoch 9/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m6s\u001b[0m 474ms/step - accuracy: 1.0000 - loss: 8.0065e-05 - val_accuracy: 1.0000 - val_loss: 5.7862e-05\n",
+            "Epoch 10/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m5s\u001b[0m 362ms/step - accuracy: 1.0000 - loss: 7.7427e-05 - val_accuracy: 1.0000 - val_loss: 5.5220e-05\n",
+            "\u001b[1m7/7\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 62ms/step - accuracy: 1.0000 - loss: 5.5220e-05\n",
+            "Test Accuracy: 1.0\n",
+            "\u001b[1m1/1\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 374ms/step\n",
+            "Prediction: [[0.9999448]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: que mi red me diga si la reseña sera positiva o negativa\n",
+        "\n",
+        "# ... (your existing code)\n",
+        "\n",
+        "# Example prediction function\n",
+        "def predict_sentiment(movie_title):\n",
+        "    new_text = [movie_title]\n",
+        "    new_sequences = tokenizer.texts_to_sequences(new_text)\n",
+        "    new_padded = pad_sequences(new_sequences, maxlen=100, padding='post', truncating='post')\n",
+        "    prediction = model.predict(new_padded)\n",
+        "    sentiment = \"Positive\" if prediction[0][0] >= 0.5 else \"Negative\"\n",
+        "    return sentiment\n",
+        "\n",
+        "# Get movie title input from the user\n",
+        "movie_title = input(\"Enter the movie title: \")\n",
+        "\n",
+        "# Preprocess the movie title\n",
+        "processed_title = preprocess_text(movie_title)\n",
+        "\n",
+        "# Predict sentiment\n",
+        "sentiment = predict_sentiment(processed_title)\n",
+        "\n",
+        "# Print the predicted sentiment\n",
+        "print(f\"Predicted sentiment for '{movie_title}': {sentiment}\")\n"
+      ],
+      "metadata": {
+        "id": "s-_rgm2pTb4A",
+        "outputId": "7e181240-455b-4b47-cfb9-e511f218268b",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 29,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter the movie title: The Lord of the Rings: The Return of the King\t\n",
+            "\u001b[1m1/1\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 589ms/step\n",
+            "Predicted sentiment for 'The Lord of the Rings: The Return of the King\t': Positive\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: Evaluar el modelo y mejorarlo agregando capas o usando embeddings pre-entrenados como Word2Vec o GloVe. realiza esto con mi dataset\n",
+        "\n",
+        "import numpy as np\n",
+        "!pip install gensim\n",
+        "\n",
+        "import gensim.downloader as api\n",
+        "\n",
+        "# Download pre-trained Word2Vec embeddings (you can try other models like 'glove-twitter-25')\n",
+        "try:\n",
+        "    word2vec_model = api.load('word2vec-google-news-300')\n",
+        "except KeyError:\n",
+        "    print(\"Error: word2vec-google-news-300 not found. Try downloading it manually:\")\n",
+        "    print(\"  import gensim.downloader as api\")\n",
+        "    print(\"  api.load('word2vec-google-news-300')\")\n",
+        "    exit()\n",
+        "\n",
+        "\n",
+        "embedding_dim = 300  # Dimension of the pre-trained Word2Vec embeddings\n",
+        "embedding_matrix = np.zeros((len(tokenizer.word_index) + 1, embedding_dim))\n",
+        "\n",
+        "for word, i in tokenizer.word_index.items():\n",
+        "    try:\n",
+        "        embedding_vector = word2vec_model[word]\n",
+        "        embedding_matrix[i] = embedding_vector\n",
+        "    except KeyError:\n",
+        "        pass  # Word not in the pre-trained vocabulary\n",
+        "\n",
+        "\n",
+        "model = Sequential()\n",
+        "model.add(Embedding(len(tokenizer.word_index) + 1, embedding_dim, weights=[embedding_matrix], input_length=100, trainable=False))\n",
+        "model.add(LSTM(128, return_sequences=True))\n",
+        "model.add(Dropout(0.2))\n",
+        "model.add(LSTM(64))\n",
+        "model.add(Dropout(0.2))\n",
+        "model.add(Dense(1, activation='sigmoid'))\n",
+        "\n",
+        "model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n",
+        "model.fit(padded_train, y_train, epochs=10, batch_size=64, validation_data=(padded_test, y_test))\n",
+        "\n",
+        "loss, accuracy = model.evaluate(padded_test, y_test)\n",
+        "print(f\"Test Accuracy: {accuracy}\")\n"
+      ],
+      "metadata": {
+        "id": "tvcrfeJPT61M",
+        "outputId": "f5462ba2-9cf3-4c47-b12c-9e7e1c26e72f",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting gensim\n",
+            "  Downloading gensim-4.3.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.1 kB)\n",
+            "Requirement already satisfied: numpy<2.0,>=1.18.5 in /usr/local/lib/python3.11/dist-packages (from gensim) (1.26.4)\n",
+            "Collecting scipy<1.14.0,>=1.7.0 (from gensim)\n",
+            "  Downloading scipy-1.13.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m60.6/60.6 kB\u001b[0m \u001b[31m2.3 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: smart-open>=1.8.1 in /usr/local/lib/python3.11/dist-packages (from gensim) (7.1.0)\n",
+            "Requirement already satisfied: wrapt in /usr/local/lib/python3.11/dist-packages (from smart-open>=1.8.1->gensim) (1.17.2)\n",
+            "Downloading gensim-4.3.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (26.7 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m26.7/26.7 MB\u001b[0m \u001b[31m31.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading scipy-1.13.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.6 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m38.6/38.6 MB\u001b[0m \u001b[31m9.7 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hInstalling collected packages: scipy, gensim\n",
+            "  Attempting uninstall: scipy\n",
+            "    Found existing installation: scipy 1.14.1\n",
+            "    Uninstalling scipy-1.14.1:\n",
+            "      Successfully uninstalled scipy-1.14.1\n",
+            "Successfully installed gensim-4.3.3 scipy-1.13.1\n",
+            "[==================================================] 100.0% 1662.8/1662.8MB downloaded\n",
+            "Epoch 1/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m32s\u001b[0m 1s/step - accuracy: 0.7669 - loss: 0.5632 - val_accuracy: 1.0000 - val_loss: 8.4002e-04\n",
+            "Epoch 2/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m20s\u001b[0m 1s/step - accuracy: 1.0000 - loss: 6.0189e-04 - val_accuracy: 1.0000 - val_loss: 6.2525e-05\n",
+            "Epoch 3/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m20s\u001b[0m 1s/step - accuracy: 1.0000 - loss: 6.8318e-05 - val_accuracy: 1.0000 - val_loss: 3.0053e-05\n",
+            "Epoch 4/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m20s\u001b[0m 1s/step - accuracy: 1.0000 - loss: 3.9420e-05 - val_accuracy: 1.0000 - val_loss: 2.3715e-05\n",
+            "Epoch 5/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m20s\u001b[0m 1s/step - accuracy: 1.0000 - loss: 3.2722e-05 - val_accuracy: 1.0000 - val_loss: 2.1416e-05\n",
+            "Epoch 6/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m14s\u001b[0m 739ms/step - accuracy: 1.0000 - loss: 2.9677e-05 - val_accuracy: 1.0000 - val_loss: 2.0093e-05\n",
+            "Epoch 7/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m8s\u001b[0m 561ms/step - accuracy: 1.0000 - loss: 2.9727e-05 - val_accuracy: 1.0000 - val_loss: 1.9065e-05\n",
+            "Epoch 8/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m10s\u001b[0m 508ms/step - accuracy: 1.0000 - loss: 2.6005e-05 - val_accuracy: 1.0000 - val_loss: 1.8177e-05\n",
+            "Epoch 9/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m10s\u001b[0m 518ms/step - accuracy: 1.0000 - loss: 2.6104e-05 - val_accuracy: 1.0000 - val_loss: 1.7373e-05\n",
+            "Epoch 10/10\n",
+            "\u001b[1m13/13\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m13s\u001b[0m 661ms/step - accuracy: 1.0000 - loss: 2.5484e-05 - val_accuracy: 1.0000 - val_loss: 1.6624e-05\n",
+            "\u001b[1m7/7\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m1s\u001b[0m 105ms/step - accuracy: 1.0000 - loss: 1.6624e-05\n",
+            "Test Accuracy: 1.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# prompt: que mi red me diga si la reseña sera positiva o negativa\n",
+        "\n",
+        "# ... (your existing code)\n",
+        "\n",
+        "# Example prediction function\n",
+        "def predict_sentiment(movie_title):\n",
+        "    new_text = [movie_title]\n",
+        "    new_sequences = tokenizer.texts_to_sequences(new_text)\n",
+        "    new_padded = pad_sequences(new_sequences, maxlen=100, padding='post', truncating='post')\n",
+        "    prediction = model.predict(new_padded)\n",
+        "    sentiment = \"Positive\" if prediction[0][0] >= 0.5 else \"Negative\"\n",
+        "    return sentiment\n",
+        "\n",
+        "# Get movie title input from the user\n",
+        "movie_title = input(\"Enter the movie title: \")\n",
+        "\n",
+        "# Preprocess the movie title\n",
+        "processed_title = preprocess_text(movie_title)\n",
+        "\n",
+        "# Predict sentiment\n",
+        "sentiment = predict_sentiment(processed_title)\n",
+        "\n",
+        "# Print the predicted sentiment\n",
+        "print(f\"Predicted sentiment for '{movie_title}': {sentiment}\")"
+      ],
+      "metadata": {
+        "id": "GX155wc-XUzq",
+        "outputId": "4da60936-584e-4647-a1fc-d6954cf65bc7",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 31,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Enter the movie title: The Return of the King\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "WARNING:tensorflow:5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7820a3c6c540> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[1m1/1\u001b[0m \u001b[32m━━━━━━━━━━━━━━━━━━━━\u001b[0m\u001b[37m\u001b[0m \u001b[1m0s\u001b[0m 444ms/step\n",
+            "Predicted sentiment for 'The Return of the King': Positive\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Te damos la bienvenida a Colaboratory",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
